@@ -33,6 +33,10 @@ async def get_user_library(user_id: int) -> dict:
     }
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if update.effective_user.id != ALLOWED_USER_ID:
+        await update.message.reply_text("Sorry, this is a private bot.")
+        return
+        
     user_id = update.effective_user.id
     user_message = update.message.text
 
